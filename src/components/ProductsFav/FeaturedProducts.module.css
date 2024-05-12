@@ -60,17 +60,20 @@
 
 
 .btnExplorar {
-  padding: 11px 12px;
-  font-size: 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: #ca63d1;
-  color: white;
+  width: 18%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
   cursor: pointer;
+  background-color: #f5e9fc;
+  text-align: center;
+  color: #6743dd;
+  font-size: 18px;
+
 }
 
 .btnExplorar:hover {
-  background-color: #6743dd;
+  background-color: #e3dff7;
 }
 
 .title1 {
@@ -81,6 +84,23 @@
   font-weight: 200;
   font-size: 35px;
   color: #ca63d1;
+}
+
+@media only screen and (max-width: 768px) {
+  .cardContainer{
+    flex-direction: column;
+    gap: 15px;
+  }
+  .btnExplorar{
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .cardContainer{
+    flex-direction: column;
+    gap: 15px;
+  }
 }
 
 

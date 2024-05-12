@@ -10,6 +10,7 @@ import LogoFestivall from "./assets/FestivallSVG.svg";
 import ProductCard from "./components/Card/ProductCard.jsx";
 import CategorySection from "./components/Categorias/CategorySection.jsx";
 import FeaturedProducts from "./components/ProductsFav/FeaturedProducts.jsx";
+/* import RegistrarProducto from "./components/PanelAdministrador/RegistrarProducto.jsx"; */
 const App = () => {
   return (
     <BrowserRouter>
@@ -28,6 +29,7 @@ const App = () => {
       <Route path="/detalle/:id" element={<DetailProduct/>} />
       <Route path="/product/:id" element={<ProductCard/>} />
     </Routes>
+    {/* <RegistrarProducto/> */}
     <Footer />
   </BrowserRouter>
   );
