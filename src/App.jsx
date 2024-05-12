@@ -9,15 +9,24 @@ const menuItems = ["Nosotros", "Servicios", "Contacto", "Galería"];
 import LogoFestivall from "./assets/FestivallSVG.svg";
 import ProductCard from "./components/Card/ProductCard.jsx";
 import CategorySection from "./components/Categorias/CategorySection.jsx";
+import FeaturedProducts from "./components/ProductsFav/FeaturedProducts.jsx";
 const App = () => {
   return (
     <BrowserRouter>
     <Navbar menuItems={menuItems} logo={LogoFestivall} />
     <CategorySection/>
     <Routes>
-      <Route path="/" element={<RandomProductsList />} />
-      <Route path="/detalle/:id" element={<DetailProduct />} />
-      <Route path="/product/:id" element={<ProductCard />} />
+    <Route
+          path="/"
+          element={(
+            <div>
+              <RandomProductsList />
+              <FeaturedProducts />
+            </div>
+          )}
+        />
+      <Route path="/detalle/:id" element={<DetailProduct/>} />
+      <Route path="/product/:id" element={<ProductCard/>} />
     </Routes>
     <Footer />
   </BrowserRouter>

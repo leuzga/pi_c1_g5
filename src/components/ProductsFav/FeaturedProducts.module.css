@@ -1,24 +1,96 @@
-/* .featuredProducts {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .productGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  
+/* FeaturedProducts.module.css */
 
-  .hidden {
-    display: none;
-  }
-  
-  .active {
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out;
-  } */
-  
+.featuredProducts {
+  width: 100%;
+  margin: 20px 0;
+  padding: 3rem;
+  text-align: center;
+}
+
+.productGrid {
+  display: flex;
+  justify-content: center;
+}
+
+.cardContainer {
+  display: flex;
+  padding: 3rem;
+}
+
+.productCard {
+  margin: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f5e9fc;
+  text-align: center;
+  width: 350px;
+  height: 350px; /* Cambia este valor según lo necesites */
+}
+
+.productCard img {
+  width: 350px;
+  height: 250px;
+  border-radius: 8px 8px 0 0;
+  object-fit: cover;
+}
+
+.productCard h3 {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.buttonContainer {
+  margin-top: 5px;
+  text-align: center;
+}
+
+.buttonContainer {
+  padding: 6px 11px;
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #795af6;
+  color: white;
+  cursor: pointer;
+}
+
+.buttonContainer:hover {
+  background-color: #6743dd;
+}
+
+
+.btnExplorar {
+  padding: 11px 12px;
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ca63d1;
+  color: white;
+  cursor: pointer;
+}
+
+.btnExplorar:hover {
+  background-color: #6743dd;
+}
+
+.title1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  font-weight: 200;
+  font-size: 35px;
+  color: #ca63d1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
