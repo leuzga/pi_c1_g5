@@ -1,0 +1,81 @@
+.productCard {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 30%;
+  height: 250px; /* Cambia este valor según lo necesites */
+}
+
+.productImage {
+  flex: 2;
+}
+
+.productImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.productDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrar verticalmente */
+  padding: 0rem 1.5rem 0rem 1.5rem;
+  text-align: center;
+  background-color: #f5e9fc;
+  height: 100%; /* Asegura que el contenedor ocupe toda la altura */
+}
+
+.productDetails h3 {
+  font-size: 20px;
+  margin-top: 0;
+}
+
+.detailButton {
+  background-color: #795af6;
+  color: white;
+  border: none;
+  padding: 6px 12px; /* Reducir el tamaño del padding */
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none; /* Eliminar el borde al hacer clic */
+  transition: background-color 0.3s; /* Agregar transición para suavizar cambios */
+  font-size: 15px;
+}
+
+.detailButton:hover {
+  background-color: #6743dd;
+  border: none;
+}
+
+.detailButton:focus,
+.detailButton:active {
+  outline: none; /* Eliminar el borde al hacer foco o al estar activo */
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 767px) {
+  .productCard {
+    width: 100%; /* Cambia el ancho a 100% para dispositivos móviles */
+    height: auto; /* Ajusta la altura automáticamente */
+  }
+
+  .productImage img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .productDetails {
+    padding: 1rem; /* Reduce el padding para dispositivos móviles */
+    background-color: #f5e9fc;
+  }
+}
+
+/* Estilos para tabletas */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .productCard {
+    width: 45%; /* Cambia el ancho a 45% para tabletas */
+  }
+}
