@@ -10,6 +10,7 @@ import ProductCard from './components/Card/ProductCard.jsx';
 import CategorySection from './components/Categorias/CategorySection.jsx';
 import { MdAdminPanelSettings } from 'react-icons/md';
 import RegistrarProducto from './components/PanelAdministrador/RegistrarProducto.jsx';
+import Inventory from './components/PanelAdministrador/Inventory.jsx';
 
 const menuItems = ['Nosotros', 'Servicios', 'Contacto', 'Galería'];
 
@@ -33,6 +34,7 @@ const App = () => {
           <Route path='/detalle/:id' element={<DetailProduct />} />
           <Route path='/product/:id' element={<ProductCard />} />
           <Route path='/RegistrarProducto' element={<RegistrarProducto />} />
+          <Route path='/inventario' element={<Inventory />} />
           <Route path='/admin' element={<Admin />} />
         </Routes>
         <Footer />
