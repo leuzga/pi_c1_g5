@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
+
 // import { Auth0Provider } from '@auth0/auth0-react';
+
 import '@fontsource/playfair-display';
 import '@fontsource/playfair-display/400.css';
 import '@fontsource/playfair-display/400-italic.css';
