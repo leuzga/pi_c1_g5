@@ -18,7 +18,7 @@ const RandomProductsList = () => {
       { id: 6, name: "Producto 6", image: "../../Documents/assets/centrodejuegos.jpeg", category: "Juegos de Destreza" },
       { id: 7, name: "Producto 7", image: "../../Documents/assets/jengaGiant.jpeg", category: "Juegos de Destreza" },
       { id: 8, name: "Producto 8", image: "../../Documents/assets/juegoinfantil1.jpeg", category: "Niños Pequeños" },
-      { id: 9, name: "Producto 9", image: "../../Documents/assets/paintball.jpeg", category: "Juegos Mecánicos" },
+      { id: 9, name: "Producto 9", image: "../../Documents/assets/paintball.jpeg", category: "Juegos de Destreza" },
       { id: 10, name: "Producto 10", image: "../../Documents/assets/soccertable.jpeg", category: "Juegos Mecánicos" },
       { id: 11, name: "Producto 11", image: "../../Documents/assets/poolgames.jpeg", category: "Juegos de Agua" },
     ];
