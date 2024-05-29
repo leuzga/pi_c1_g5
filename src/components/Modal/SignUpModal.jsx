@@ -13,7 +13,6 @@ const SignUpModal = ({ showModal, setShowModal }) => {
     email: '',
     direccion: '',
     password: '',
-    confirmPassword: '',
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -62,7 +61,6 @@ const SignUpModal = ({ showModal, setShowModal }) => {
 
       await sendEmail(formData.email);
       setShowSuccessMessage(true);
-      
       setTimeout(() => {
         setShowSuccessMessage(false);
         setShowModal(false);
@@ -95,10 +93,6 @@ const SignUpModal = ({ showModal, setShowModal }) => {
                 id='rut'
                 name='rut'
                 value={formData.rut}
-                onChange={handleChange}
-                required
-              />
-
               <label htmlFor='nombre'>Nombre:</label>
               <input
                 className={styles.input}
@@ -109,7 +103,6 @@ const SignUpModal = ({ showModal, setShowModal }) => {
                 onChange={handleChange}
                 required
               />
-
               <label htmlFor='apellido'>Apellidos:</label>
               <input
                 className={styles.input}
@@ -120,7 +113,6 @@ const SignUpModal = ({ showModal, setShowModal }) => {
                 onChange={handleChange}
                 required
               />
-
               <label htmlFor='telefono'>Teléfono:</label>
               <input
                 className={styles.input}
@@ -142,7 +134,6 @@ const SignUpModal = ({ showModal, setShowModal }) => {
                 onChange={handleChange}
                 required
               />
-
               <label htmlFor='direccion'>Dirección:</label>
               <input
                 className={styles.input}
@@ -153,7 +144,6 @@ const SignUpModal = ({ showModal, setShowModal }) => {
                 onChange={handleChange}
                 required
               />
-
               <label htmlFor='password'>Contraseña:</label>
               <div className={styles.passwordContainer}>
                 <input
@@ -172,7 +162,6 @@ const SignUpModal = ({ showModal, setShowModal }) => {
                   {showPassword ? <TbEyeClosed /> : <RxEyeOpen />}
                 </span>
               </div>
-
               <label htmlFor='confirmPassword'>Confirmar Contraseña:</label>
               <input
                 className={styles.input}
@@ -183,7 +172,6 @@ const SignUpModal = ({ showModal, setShowModal }) => {
                 onChange={handleChange}
                 required
               />
-
               <button className={styles.submit} type='submit'>
                 Registrarse
               </button>
