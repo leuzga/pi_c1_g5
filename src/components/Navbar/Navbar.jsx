@@ -1,9 +1,13 @@
+import * as React from 'react';
 import { useState } from 'react';
+import { Button } from '@fluentui/react-components';
+import { ImSearch } from 'react-icons/im';
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 import SignUpModal from '../Modal/SignUpModal';
 import MenuAvatar from './MenuAvatar';
+import SearchDrawer from '../Search/SearchDrawer';
 
 const NavbarContainer = styled.nav`
   display: flex;
@@ -65,12 +69,6 @@ const NavButton = styled.button`
   }
 `;
 
-const SearchInput = styled.input`
-  border-radius: 20px;
-  padding: 10px 20px;
-  border: none;
-`;
-
 const Avatar = styled.div`
   width: 40px;
   height: 40px;
@@ -103,6 +101,15 @@ const Navbar = ({ menuItems, logo }) => {
     setShowModal(true);
   };
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <>
       <NavbarContainer>
@@ -123,7 +130,15 @@ const Navbar = ({ menuItems, logo }) => {
           )}
         </CenterSection>
         <RightSection>
-          <SearchInput type='text' placeholder='Buscar' />
+          <Button
+            appearance='primary'
+            iconPosition='before'
+            onClick={handleOpen}
+            shape='circular'
+            icon={<ImSearch />}
+          >
+            Buscar
+          </Button>
           {isAuthenticated && <MenuAvatar user={user} />}
           {!isAuthenticated && (
             <NavButton
@@ -136,6 +151,7 @@ const Navbar = ({ menuItems, logo }) => {
           <NavButton onClick={handleSignUpClick}>Sign Up</NavButton>
         </RightSection>
       </NavbarContainer>
+      <SearchDrawer open={open} onClose={handleClose} />
       <SignUpModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );

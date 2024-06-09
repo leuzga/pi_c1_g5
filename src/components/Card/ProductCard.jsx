@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { HiOutlineShare, HiHeart, HiOutlineHeart } from 'react-icons/hi'; // Importa los íconos de corazón
@@ -116,15 +116,14 @@ const FavoriteIconWrapper = styled.div`
   position: absolute;
   top: 16px;
   right: 16px;
-  color: ${({ isFavorite }) => (isFavorite ? '#795af6' : '#795af6')}; // Cambia el color del icono según el estado de favorito
   cursor: pointer;
+  color: #ff00ff;
   z-index: 1;
   font-size: 30px;
   svg {
     stroke-width: 1px; /* Establece el grosor del borde del corazón */
   }
 `;
-
 
 const ProductCard = ({ product }) => {
   const [isFavorite, setIsFavorite] = useState(false); // Estado para controlar si el producto está marcado como favorito
@@ -164,8 +163,12 @@ const ProductCard = ({ product }) => {
         </Popover>
 
         {/* Agrega el botón de favoritos y maneja el estado de favorito */}
-        <FavoriteIconWrapper onClick={toggleFavorite} isFavorite={isFavorite}>
-          {isFavorite ? <HiHeart /> : <HiOutlineHeart />}
+        <FavoriteIconWrapper onClick={toggleFavorite}>
+          {isFavorite ? (
+            <HiOutlineHeart style={{ fill: '#D81B60', stroke: '#5B5FC7' }} />
+          ) : (
+            <HiHeart style={{ fill: 'none' }} />
+          )}
         </FavoriteIconWrapper>
       </CardContainer>
     </>
@@ -173,4 +176,3 @@ const ProductCard = ({ product }) => {
 };
 
 export default ProductCard;
-
