@@ -1,13 +1,12 @@
-import * as React from 'react';
-import { useState } from 'react';
 import { Button } from '@fluentui/react-components';
 import { ImSearch } from 'react-icons/im';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
+// import { useAuth0 } from '@auth0/auth0-react'; // Comentado por ahora
 import styled from 'styled-components';
 import SignUpModal from '../Modal/SignUpModal';
 import MenuAvatar from './MenuAvatar';
-import SearchDrawer from '../Search/SearchDrawer';
+import { useAuth } from '../AuthContext/AuthContext';
 
 const NavbarContainer = styled.nav`
   display: flex;
@@ -69,24 +68,17 @@ const NavButton = styled.button`
   }
 `;
 
-const Avatar = styled.div`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: gray;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-  }
+const SearchInput = styled.input`
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: none;
 `;
 
 const Navbar = ({ menuItems, logo }) => {
   const admin = true;
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const { isAuthenticated, user, login } = useAuth(); // Importa la función de logout
 
   const redirectToHome = () => {
     navigate('/');
@@ -95,21 +87,18 @@ const Navbar = ({ menuItems, logo }) => {
   const redirectToAdmin = () => {
     navigate('/admin');
   };
-  const { loginWithRedirect, isAuthenticated, user } = useAuth0();
 
   const handleSignUpClick = () => {
     setShowModal(true);
   };
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
+  const handleLogin = () => {
+    const simulatedUser = { name: 'John Doe', picture: '../public/assets/ninos.jpg' };
+    login(simulatedUser);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  
+
   return (
     <>
       <NavbarContainer>
@@ -130,31 +119,22 @@ const Navbar = ({ menuItems, logo }) => {
           )}
         </CenterSection>
         <RightSection>
-          <Button
-            appearance='primary'
-            iconPosition='before'
-            onClick={handleOpen}
-            shape='circular'
-            icon={<ImSearch />}
-          >
-            Buscar
-          </Button>
+          <SearchInput type='text' placeholder='Buscar' />
           {isAuthenticated && <MenuAvatar user={user} />}
-          {!isAuthenticated && (
-            <NavButton
-              onClick={() => loginWithRedirect()}
-              disabled={isAuthenticated}
-            >
-              LogIn
-            </NavButton>
+          {!isAuthenticated ? (
+            <NavButton onClick={handleLogin}>LogIn</NavButton>
+          ) : (
+            <>
+
+            </>
           )}
           <NavButton onClick={handleSignUpClick}>Sign Up</NavButton>
         </RightSection>
       </NavbarContainer>
-      <SearchDrawer open={open} onClose={handleClose} />
       <SignUpModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 };
 
 export default Navbar;
+

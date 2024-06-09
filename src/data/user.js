@@ -37,14 +37,14 @@ export const createUser = async (userData) => {
 };
 
 // Actualizar un usuario existente
-export const updateUser = async (userId, updatedUserData) => {
+export const updateUser = async (userId) => {
   try {
-    const response = await fetch(`${API_URL}/${userId}`, {
+    const response = await fetch(API_URL, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(updatedUserData),
+      body: JSON.stringify(userId),
     });
     if (!response.ok) {
       throw new Error('Error al actualizar usuario');
@@ -68,6 +68,20 @@ export const deleteUser = async (userId) => {
     }
   } catch (error) {
     console.error('Error al eliminar usuario:', error);
+    throw error;
+  }
+};
+
+export const getUserIdByEmail = async (email) => {
+  try {
+    const response = await fetch(`${API_URL}?email=${email}`);
+    if (!response.ok) {
+      throw new Error('Error al obtener el ID del usuario');
+    }
+    const user = await response.json();
+    return user.id;
+  } catch (error) {
+    console.error('Error al obtener el ID del usuario:', error);
     throw error;
   }
 };

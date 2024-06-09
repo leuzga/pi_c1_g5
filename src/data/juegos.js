@@ -87,6 +87,28 @@ const fetchSuggestions = async () => {
   }
 };
 
+const getValoraciones = async (juegoId) => {
+  const response = await fetch(`http://localhost:8080/api/valoracion/filter/${juegoId}`);
+  if (!response.ok) {
+    throw new Error('Error al obtener valoraciones');
+  }
+  return response.json();
+};
+
+const enviarValoracion = async (juegoId, valoracionData) => {
+  const response = await fetch(`http://localhost:8080/api/valoracion/${juegoId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(valoracionData),
+  });
+  if (!response.ok) {
+    throw new Error('Error al enviar la valoración');
+  }
+  return response.json();
+};
+
 export {
   obtenerProductos,
   agregarProducto,
@@ -94,4 +116,5 @@ export {
   actualizarProducto,
   eliminarProducto,
   fetchSuggestions,
+  getValoraciones,
 };

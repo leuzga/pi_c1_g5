@@ -1,14 +1,25 @@
-import { useState } from 'react';
+
+import  { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { HiOutlineShare, HiHeart, HiOutlineHeart } from 'react-icons/hi'; // Importa los íconos de corazón
+
 import {
   Popover,
   PopoverTrigger,
   PopoverSurface,
+
 } from '@fluentui/react-components';
-import ShareSocial from '../ShareSocial/ShareSocial';
-import '@fontsource/capriola';
+import { useAuth } from '../AuthContext/AuthContext';
+
+} from "@fluentui/react-components";
+import ShareSocial from "../ShareSocial/ShareSocial";
+import "@fontsource/capriola";
+import { Rating as FluentRating } from "@fluentui/react-components";
+import { useNavigate } from "react-router-dom";
+import useRatingStore from "../Rating/useRatingStore";
+import { Button } from "@fluentui/react-components";
+
 
 const CardContainer = styled.div`
   position: relative;
@@ -34,7 +45,7 @@ const ContentContainer = styled.div`
   z-index: 1;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -74,7 +85,7 @@ const TextContainer = styled.div`
 
 const Title = styled.h3`
   margin: 0;
-  font-family: 'Capriola', sans-serif;
+  font-family: "Capriola", sans-serif;
   font-size: 35px;
   color: #333;
 `;
@@ -121,24 +132,55 @@ const FavoriteIconWrapper = styled.div`
   z-index: 1;
   font-size: 30px;
   svg {
-    stroke-width: 1px; /* Establece el grosor del borde del corazón */
+    stroke-width: 1px;
   }
 `;
 
+const RatingWrapper = styled.div`
+  margin-top: auto;
+  align-self: center;
+  user-select: none;
+  pointer-events: none;
+`;
+
 const ProductCard = ({ product }) => {
-  const [isFavorite, setIsFavorite] = useState(false); // Estado para controlar si el producto está marcado como favorito
+  const { isAuthenticated, favorites, addFavorite, removeFavorite } = useAuth();
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    // Verificar si el producto está marcado como favorito al cargar el componente
+    setIsFavorite(favorites.includes(product.id));
+  }, [product.id, favorites]);
+
 
   const toggleFavorite = () => {
-    setIsFavorite(!isFavorite); // Cambia el estado de favorito al contrario del estado actual
+    if (!isAuthenticated) {
+      console.log('Redireccionar al inicio de sesión...');
+      return;
+    }
+
+    if (isFavorite) {
+      removeFavorite(product.id);
+    } else {
+      addFavorite(product.id);
+    }
+    setIsFavorite(!isFavorite);
   };
 
   if (!product) {
     return <div>No hay información del producto</div>;
   }
+  const { id, nombre, img_url, promedioValoracion } = product;
 
-  const { id, nombre, img_url } = product;
-
+  const navigate = useNavigate();
+  const setJuegoId = useRatingStore((state) => state.setJuegoId);
+  const handleDetalle = () => {
+    setJuegoId(id);
+    navigate(`/detalle/${id}`);
+  };
+  const averageRating = promedioValoracion;
   return (
+
     <>
       <CardContainer>
         <ImageWrapper>
@@ -147,7 +189,11 @@ const ProductCard = ({ product }) => {
         <ContentContainer>
           <TextContainer>
             <Title>{nombre}</Title>
-            <DetailLink to={`/detalle/${id}`}>Ver Detalle</DetailLink>
+            <RatingWrapper>
+              <FluentRating value={averageRating} readOnly />
+            </RatingWrapper>
+            <Button appearance="primary" onClick={handleDetalle}> Ver Detalle</Button>
+          
           </TextContainer>
         </ContentContainer>
         <Popover withArrow>
@@ -172,6 +218,7 @@ const ProductCard = ({ product }) => {
         </FavoriteIconWrapper>
       </CardContainer>
     </>
+
   );
 };
 
