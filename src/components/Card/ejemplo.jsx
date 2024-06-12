@@ -34,14 +34,7 @@ const RandomProductsList = () => {
     return response.json();
   }
 
-  if (isFetching) {
-    return (
-      <div className={styles.spinnerContainer}>
-        <Spinner appearance='primary' label={'Cargando Juegos...'} />
-      </div>
-    );
-  }
-
+  if (isFetching) return <Spinner appearance='primary' label={'Cargando...'} />;
   if (error) return 'Ha ocurrido un error: ' + error.message;
 
   const handleCategorySelect = (categories) => {

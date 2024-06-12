@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaCircle } from 'react-icons/fa';
 import useDetailProduct from './useDetailProduct';
+import { Spinner } from '@fluentui/react-components';
 import Rating from '../Rating/Rating';
 import Politicas from '../Politicas/Politicas';
 import usePoliticasStore from '../Politicas/usePoliticasStore';
@@ -63,15 +64,18 @@ const DetailProduct = () => {
   const [politicas, setPoliticas] = useState([]);
 
   useEffect(() => {
-    if (isLoading) {
-      toast.info('Cargando...', { autoClose: false, toastId: 'ToastyLoad' });
-    } else {
-      toast.dismiss('ToastyLoad');
-    }
     if (error) {
       toast.error('Error al cargar la data');
     }
-  }, [isLoading, error]);
+  }, [error]);
+
+  if (isLoading) {
+    return (
+      <div className={styles.spinnerContainer}>
+        <Spinner appearance="primary" label="Cargando detalle..." />
+      </div>
+    );
+  }
 
   useEffect(() => {
     if (isPoliticasOpen) {
@@ -90,13 +94,17 @@ const DetailProduct = () => {
   }
 
   return (
-    product && (
-      <div className={styles.detailContainer}>
-        <div className={styles.productHeader}>
-          <h1 className={styles.productTitle}>{product?.nombre}</h1>
-          <Link to='/' className={styles.goBack}>
-            <IoIosArrowBack color='white' size={40} />
-          </Link>
+    <div className={styles.detailContainer}>
+      <div className={styles.productHeader}>
+        <h1 className={styles.productTitle}>{product?.nombre}</h1>
+        <Link to="/" className={styles.goBack}>
+          <IoIosArrowBack color="white" size={40} />
+        </Link>
+      </div>
+      <div className={styles.productBody}>
+        <div className={styles.productDescription}>
+          <p>{product?.descripcion}</p>
+          <MoreButton onClick={openModal}>Ver más</MoreButton>
         </div>
         <div className={styles.productBody}>
           <div className={styles.productDescription}>
@@ -108,23 +116,19 @@ const DetailProduct = () => {
             <img src={product?.img_url} alt={product?.nombre} />
             <Rating promedioValoracion={product ? product.promedioValoracion : 0} />
           </div>
-        </div>
-        <div className={styles.contCarac}>
-          <div className={styles.productCharacteristics}>
-            {product?.caracteristicas.map((caracteristica, index) => (
-              <div key={index} className={styles.characteristic}>
-                <div className={styles.characteristicItem}>
-                  <FaCircle color='#f5e9fc' size={10} />
-                  <p>{caracteristica.nombre}</p>
-                </div>
+      </div>
+      <div className={styles.contCarac}>
+        <div className={styles.productCharacteristics}>
+          {product?.caracteristicas.map((caracteristica, index) => (
+            <div key={index} className={styles.characteristic}>
+              <div className={styles.characteristicItem}>
+                <FaCircle color="#f5e9fc" size={10} />
+                <p>{caracteristica.nombre}</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
 
-        <Modal>
-          <GalleryImgs />
-        </Modal>
         <Politicas>
           {politicas.length > 0 ? (
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -138,12 +142,17 @@ const DetailProduct = () => {
           ) : (
             'Cargando políticas...'
           )}
+          </div>
         </Politicas>
-
-        <ToastContainer position='top-center' />
       </div>
-    )
+
+      <Modal>
+        <GalleryImgs />
+      </Modal>
+      <ToastContainer position="top-center" />
+    </div>
   );
 };
 
 export default DetailProduct;
+
